@@ -32,7 +32,8 @@ module.exports = function makeWebpackConfig() {
       new ExtractTextPlugin('style.css'),
       new HtmlWebpackPlugin({
         template: './src/index.html',
-        inject: 'body'
+        inject: 'body',
+        favicon: './src/sources/img/pizza.png'
       }),
       new CopyWebpackPlugin([{
         from: __dirname + '/src/public'

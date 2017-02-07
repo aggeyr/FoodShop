@@ -1,10 +1,17 @@
 import { combineReducers } from 'redux';
-// import model from './Reducer';
-// import htmlModel from './htmlReducer';
 import {routerReducer} from 'react-router-redux';
 
+import AppReducer from './AppReducer';
+import BasketReducer from './BasketReducer';
+import LandingPageReducer from './LandingReducer';
+import MenuReducer from './MenuReducer';
+import OrderReducer from './OrderReducer';
+
 export default combineReducers({
-  // model,
-  // htmlModel,
+  AppReducer,
+  BasketReducer,
+  LandingPageReducer,
+  MenuReducer,
+  OrderReducer,
   routing: routerReducer
 });
