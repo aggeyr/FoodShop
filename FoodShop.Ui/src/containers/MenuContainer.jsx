@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/LandingPageActions';
+import * as actions from '../actions/MenuActions';
 
-import MenusList from '../components/menus/MenusList.jsx';
+import Menu from '../components/menus/Menu.jsx';
 
 class MenusContainer extends Component {
   render() {
     const {model, actions, params} = this.props;
-
     return (
-      <MenusList model={model} actions={actions} {...params} />
+
+      <Menu model={model} actions={actions} {...params} />
     );
   }
 }

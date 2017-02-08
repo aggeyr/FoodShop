@@ -2,12 +2,16 @@ html {
   background: url("../img/back.png") repeat;
 }
 body {
+  font-family: 'Roboto', sans-serif;
   background: transparent;
   margin: 0;
 }
 header {
-  font-family: 'Roboto', sans-serif;
   font-size: 16px;
+}
+a, a:hover {
+  text-decoration: none;
+  color: #000;
 }
 .head {
   background-color: #fff !important;
@@ -21,7 +25,6 @@ header {
 .top_menu {
   height: 100%;
   margin-top: 5px;
-  border-top: 1px solid;
   display: table !important;
   padding: 0;
 }
@@ -31,20 +34,48 @@ header {
   padding: 0;
   list-style-type: none;
   display: table-cell;
+  border-top: 1px solid #000;
 
-  a {
-    text-decoration: none;
-    color: #000;
+  a, p {
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
   }
 
   &:hover {
-    border-top: 4px solid;
+    border-top: 4px solid #000;
   }
 }
+.body_container {
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 30px 15px 0;
+}
+.basket {
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 70px;
+  text-align: center;
 
-.test {
-  background-color: red !important;
-  float: left;
+  img {
+    width: 30px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+}
+footer {
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+.by-line {
+  font-size: 10px;
+  margin-top: -10px;
+  color: rgba(0, 0, 0, 0.6);
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 920px;
+  }
 }
