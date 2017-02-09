@@ -29,5 +29,11 @@ namespace FoodShop.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Category> Categories;
+        public DbSet<Configuration> Configurations;
+        public DbSet<Discount> Discounts;
+        public DbSet<Good> Goods;
+        public DbSet<Order> Orders;
     }
 }
