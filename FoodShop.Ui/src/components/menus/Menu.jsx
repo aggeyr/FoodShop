@@ -9,11 +9,12 @@ class Menu extends Component {
     getMenus(category);
   }
   render() {
-    const { view } = this.props.model;
+    const { view, app: { selectedMeals } } = this.props.model;
+    const { selectMeal } = this.props.actions;
     return (
       <div>
         <Filter />
-        <MenusList {...view} />
+        <MenusList {...view} selectedMeals={selectedMeals} selectMeal={selectMeal} />
       </div>
     );
   }

@@ -27,19 +27,19 @@ function getMeals(categoryName, success) {
         {
           Size: '12см',
           Weight: '350г',
-          Price: '5 BYN',
+          Price: '5',
           Id: 'confid' + 1
         },
         {
           Size: '18см',
           Weight: '500г',
-          Price: '8 BYN',
+          Price: '8',
           Id: 'confid' + 2
         },
         {
           Size: '20см',
           Weight: '650г',
-          Price: '10 BYN',
+          Price: '10',
           Id: 'confid' + 3
         },
       ]

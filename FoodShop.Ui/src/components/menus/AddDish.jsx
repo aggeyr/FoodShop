@@ -1,56 +1,44 @@
 /*eslint no-unused-vars: "off"*/
 import React, { Component } from 'react';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import RenderSelect from '../common/RenderSelect.jsx';
+import * as utils from '../../utils/utils';
 
 class AddDish extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selected: []
+  componentWillMount() {
+    this.calculateTotal();
+  }
+  onDishSelect(number, meal) {
+    const { onSelect, selected } = this.props;
+    const newMeal = {
+      id: meal.Id,
+      price : meal.Price,
+      number
     };
+    onSelect(utils.mergeSelected(selected, newMeal));
+    this.calculateTotal();
   }
-  getNumber(id) {
-    debugger;
-    const { selected } = this.state;
-    selected.forEach((menu) => {
-      if (menu.id === id) return menu.number;
-    });
-    return 0;
+  calculateTotal() {
+    const { selected } = this.props;
+    const total = utils.calculateTotal(selected);
+    this.setState({ total });
   }
-  onDishSelect(number, id) {
-    const { selected } = this.state;
-    let index = selected.findIndex((item) => item.id === id);
-    if (~index) {
-      selected[index].number = number;
-    } else {
-      selected.push({ id, number });
-    }
-    console.log(this.state.selected);
-  }
-  renderNumberOptions(number) {
-    let options = [];
-    for(let i = 0; i < number; i++) {
-      options.push({
-        value: i,
-        text: i
-      });
-    }
-    return options;
+  getNumber(confId) {
+    const { selected } = this.props;
+    return utils.findNumber(selected, confId);
   }
   render() {
-  const { ImageUrl, Description, Calories, Configurations } = this.props;
-  const numberValues = this.renderNumberOptions(10);
+  const { ImageUrl, Description, Configurations, Name } = this.props;
+  const { total } = this.state;
+  const values = utils.renderNumberOptions(10);
     return (
       <div>
         <div className="col-md-5">
           <img src={ImageUrl} />
         </div>
         <div className="col-md-7">
-          <p>{ Description }</p>
-          <p className="dish_option">Калории: { Calories }</p>
+          <p>{ Name }</p>
+          <p className="dish_option">{ Description }</p>
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
@@ -65,18 +53,19 @@ class AddDish extends Component {
                 <TableRow key={key}>
                   <TableRowColumn>{item.Size}</TableRowColumn>
                   <TableRowColumn>{item.Weight}</TableRowColumn>
-                  <TableRowColumn>{item.Price}</TableRowColumn>
+                  <TableRowColumn>${item.Price}</TableRowColumn>
                   <TableRowColumn><RenderSelect
                     label="Количество"
-                    defaultValue={0}
-                    options={numberValues}
-                    onChange={(value) => this.onDishSelect(value, item.Id)}
+                    defaultValue={this.getNumber(item.Id)}
+                    options={values}
+                    onChange={(value) => this.onDishSelect(value, item)}
                   />
                   </TableRowColumn>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+          <p className="pull-left">Итого:</p><p className="pull-right">${total}</p>
         </div>
       </div>
     );
@@ -84,8 +73,4 @@ class AddDish extends Component {
 }
 
 export default AddDish;
-//
-// Size: '12см',
-//   Weight: '350г',
-//   Price: '5 BYN'
 

@@ -24,6 +24,5 @@ export function getMenus(categoryName) {
         status
       });
     }
-
   };
 }

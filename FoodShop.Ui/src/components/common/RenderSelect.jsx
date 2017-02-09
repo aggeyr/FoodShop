@@ -1,6 +1,5 @@
 /*eslint no-unused-vars: "off"*/
 import React, { Component } from 'react';
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 

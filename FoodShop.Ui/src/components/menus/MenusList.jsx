@@ -3,47 +3,70 @@ import React, { Component } from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import Subheader from 'material-ui/Subheader';
 import Dialog from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
 import AddDish from './AddDish.jsx';
 import FlatButton from 'material-ui/FlatButton';
+import * as utils from '../../utils/utils';
+import history from '../../store/History';
 
 class MenusList extends Component {
   constructor() {
     super();
     this.state = {
+      selected: [],
+      snackShow: false,
       dialogOptions: {
         open: false,
         menu: {},
         modal: false,
         title: 'Добавить в корзину'
-      }
+      },
     };
+    this.closeModal = this.closeModal.bind(this);
+    this.onMealSelected = this.onMealSelected.bind(this);
+    this.handleCloseSnackbar = this.handleCloseSnackbar.bind(this);
+  }
+  onMealSelected(selected) {
+    this.setState({ selected });
+  }
+  findSelected(configurations) {
+    const { selectedMeals } = this.props;
+    return utils.findSelectedConfigurations(selectedMeals, configurations);
   }
   openDialog(menu) {
     let { dialogOptions } = this.state;
+    const selected = this.findSelected(menu.Configurations);
     dialogOptions.open = true;
     dialogOptions.menu = menu;
-    this.setState({ dialogOptions });
+    this.setState({ dialogOptions, selected });
   }
-  closeDialog() {
-    let { dialogOptions } = this.state;
+  closeModal(submit) {
+    let { dialogOptions, selected } = this.state;
+    const { selectMeal, selectedMeals } = this.props;
     dialogOptions.open = false;
-    this.setState({ dialogOptions });
+    if (submit) {
+      selectMeal(selectedMeals, selected);
+    }
+    this.setState({ dialogOptions, selected: [], snackShow: submit });
+  }
+  handleCloseSnackbar() {
+    this.setState({ snackShow: false });
   }
   render() {
     const { menus } = this.props;
-    const { dialogOptions } = this.state;
+    const { dialogOptions, selected, snackShow } = this.state;
     const sizeList = () => (<p style={{ color: '#000' }}>Список размеров</p>);
     const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onTouchTap={this.closeDialog.bind(this)}
+        onTouchTap={() => this.closeModal(false)}
       />,
       <FlatButton
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.closeDialog.bind(this)}
+        onTouchTap={() => this.closeModal(true)}
       />
     ];
     return (
@@ -68,11 +91,23 @@ class MenusList extends Component {
           className="add_modal"
           {...dialogOptions}
           actions={actions}
-          onRequestClose={this.closeDialog.bind(this)}
+          onRequestClose={() => this.closeModal(false)}
           autoScrollBodyContent
         >
-          <AddDish {...dialogOptions.menu} />
+          <AddDish
+            {...dialogOptions.menu}
+            selected={selected}
+            onSelect={this.onMealSelected}
+          />
         </Dialog>
+        <Snackbar
+          open={snackShow}
+          message={dialogOptions.menu.Name + ' добавлен в корзину'}
+          autoHideDuration={4000}
+          action="просмотреть"
+          onActionTouchTap={() => history.push('/basket')}
+          onRequestClose={this.handleCloseSnackbar}
+        />
       </span>
     );
   }

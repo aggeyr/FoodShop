@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "off"*/
 import * as types from '../constants/MenuConstants';
 
 const initialState = {
@@ -17,3 +18,4 @@ export default function MenuReducer(state = initialState, action) {
       return state;
   }
 }
+

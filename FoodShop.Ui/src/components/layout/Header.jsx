@@ -5,6 +5,7 @@ import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import { Link } from 'react-router';
 import icon from '../../sources/img/basket.png';
 import history from '../../store/History';
+import * as utils from '../../utils/utils';
 
 class Header extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class Header extends Component {
     injectTapEventPlugin();
   }
   render() {
+    const { total } = this.props;
     return (
       <header>
         <Toolbar className="head">
@@ -21,7 +23,12 @@ class Header extends Component {
             <Item to="/menu/hot">Горячие блюда</Item>
             <Item to="/menu/pizza">Пицца</Item>
             <Item to="/menu/sushi">Суши</Item>
-            <Basket />
+            <div className="basket">
+              <Link to="/basket">
+                <img src={icon} />
+                <p>Total: ${total}</p>
+              </Link>
+            </div>
           </ToolbarGroup>
         </Toolbar>
       </header>
@@ -29,16 +36,6 @@ class Header extends Component {
   }
 }
 
-let Basket = () => {
-  return (
-    <div className="basket">
-      <Link to="/basket">
-        <img src={icon} />
-        <p>Total: $42</p>
-      </Link>
-    </div>
-  );
-};
 
 let Item = (props) => {
   const { children, to } = props;
