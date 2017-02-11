@@ -3,12 +3,24 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace FoodShop.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            AvatarUrl = "http://res.cloudinary.com/dum4mjc9q/image/upload/v1462886192/UserAvatars/defaultUser.png";
+        }
+
+        public string AvatarUrl { get; set; }
+
+        public string About { get; set; }
+
+        public IList<Subscription> Subscriptions { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -30,10 +42,11 @@ namespace FoodShop.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Category> Categories;
-        public DbSet<Configuration> Configurations;
-        public DbSet<Discount> Discounts;
-        public DbSet<Good> Goods;
-        public DbSet<Order> Orders;
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Good> Goods { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
     }
 }

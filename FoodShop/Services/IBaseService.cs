@@ -8,6 +8,5 @@ namespace FoodShop.Services
 {
     public interface IBaseService
     {
-        ApplicationDbContext Context { get; }
     }
 }

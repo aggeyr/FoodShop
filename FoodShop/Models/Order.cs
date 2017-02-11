@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace FoodShop.Models
 
         public Discount UsedDiscount { get; set; }
 
-        public Decimal Total { get; set; }
+        [DefaultValue(false)]
+        public bool Closed { get; set; }
+
+        public IList<Good> Goods { get; set; }
     }
 }

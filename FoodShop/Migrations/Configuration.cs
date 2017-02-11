@@ -1,6 +1,12 @@
+using System;
+using System.IO;
+
 namespace FoodShop.Migrations
 {
+    using Models;
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -14,18 +20,14 @@ namespace FoodShop.Migrations
 
         protected override void Seed(FoodShop.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.Categories.AddOrUpdate(x => x.Id,
+                new Category() { Name = "salads" },
+                new Category() { Name = "hot" },
+                new Category() { Name = "pizza" },
+                new Category() { Name = "sushi" }
+             );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            base.Seed(context);
         }
     }
 }

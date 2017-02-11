@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace FoodShop.Models
 {
-    [Table("Categories")]
-    public class Category
+    [Table("Subscriptions")]
+    public class Subscription
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public Guid? ParentId { get; set; }
-
         [Required]
         public string Name { get; set; }
 
-        public virtual IList<Good> Goods { get; set; }
+        public virtual IList<ApplicationUser> Users { get; set; }
     }
 }

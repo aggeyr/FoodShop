@@ -20,7 +20,7 @@ namespace FoodShop.Models
 
         public string ImageUrl { get; set; }
 
-        public IList<Configuration> Configurations;
+        public IList<Configuration> Configurations { get; set; }
 
         public IList<Category> Categories { get; set; }
     }

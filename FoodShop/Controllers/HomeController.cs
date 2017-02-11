@@ -10,13 +10,7 @@ namespace FoodShop.Controllers
 {
     [EnableCors("*", "*", "*")]
     public class HomeController : Controller
-    {
-        private readonly IMenuService menuService;
-
-        public HomeController(IMenuService menuService)
-        {
-            this.menuService = menuService;
-        }
+    { 
 
         public ActionResult Index()
         {
