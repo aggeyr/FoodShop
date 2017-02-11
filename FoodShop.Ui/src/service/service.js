@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "off"*/
 import { RequestHelper } from './apiConnector';
 
 import image from '../sources/img/dishEx.jpg';
@@ -7,9 +8,13 @@ class service {
     this.requestHelper = new RequestHelper();
   }
 
-  getMeals = (categoryName, success, failed) => {
-    //return this.requestHelper.getWithAjax('AuthTest/AuthorizedUser', success, failed);
-    return getMeals(categoryName, success, failed);
+  getGoodsByCategoryId = (data, success, failed) => {
+    return this.requestHelper.getWithAjax('Good/getGoodsByCategoryId', data, success, failed);
+    // return getMeals(categoryName, success, failed);
+  };
+
+  getGoodsByCategoryName = (data, success, failed) => {
+    return this.requestHelper.getWithAjax('Good/getGoodsByCategoryName', data, success, failed);
   };
 
 }

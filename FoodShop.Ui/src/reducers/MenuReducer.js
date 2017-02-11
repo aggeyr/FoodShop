@@ -8,7 +8,7 @@ const initialState = {
 export default function MenuReducer(state = initialState, action) {
   switch (action.type) {
 
-    case types.GET_MENU_SUCCESS:
+    case types.GET_GOOD_SUCCESS:
       return {
         ...state,
         menus: action.data

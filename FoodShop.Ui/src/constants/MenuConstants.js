@@ -1,5 +1,6 @@
-// Getting menu items
-export const GET_MENU = 'GET_MENU';
-export const GET_MENU_SUCCESS = 'GET_MENU_SUCCESS';
-export const GET_MENU_FAIL = 'GET_MENU_FAIL';
+// Getting good items
+export const GET_GOOD = 'GET_GOOD';
+export const GET_GOOD_SUCCESS = 'GET_GOOD_SUCCESS';
+export const GET_GOOD_FAIL = 'GET_GOOD_FAIL';
+
 

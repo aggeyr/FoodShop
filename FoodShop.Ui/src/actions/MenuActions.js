@@ -1,17 +1,21 @@
 import * as types from '../constants/MenuConstants';
 import service from '../service/service';
 
-export function getMenus(categoryName) {
+export function getGoods(data, byName) {
   return (dispatch) => {
     dispatch({
-      type: types.GET_MENU
+      type: types.GET_GOOD
     });
 
-    service.getMeals(categoryName, success, fail);
+    if (byName) {
+      service.getGoodsByCategoryName({ name: data }, success, fail);
+    } else {
+      service.getGoodsByCategoryId({ id: data }, success, fail);
+    }
 
     function success(data, status) {
       dispatch({
-        type: types.GET_MENU_SUCCESS,
+        type: types.GET_GOOD_SUCCESS,
         data,
         status
       });
@@ -19,7 +23,7 @@ export function getMenus(categoryName) {
 
     function fail(data, status) {
       dispatch({
-        type: types.GET_MENU_FAIL,
+        type: types.GET_GOOD_FAIL,
         data,
         status
       });

@@ -31,13 +31,9 @@ var RequestHelper = function() {
 };
 
 function makeRequest(params, success, failed) {
-  const token = sessionStorage.getItem('id_token');
 
   return req.ajax({
     ...params,
-    headers: {
-      Authorization: 'Bearer ' + token
-    },
     success: function(data, statusText, xhr) {
       success &&
       success(data, statusText, xhr);

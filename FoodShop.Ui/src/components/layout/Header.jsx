@@ -1,11 +1,8 @@
-/*eslint no-unused-vars: "off"*/
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import { Link } from 'react-router';
 import icon from '../../sources/img/basket.png';
-import history from '../../store/History';
-import * as utils from '../../utils/utils';
 
 class Header extends Component {
   constructor() {
@@ -35,7 +32,6 @@ class Header extends Component {
     );
   }
 }
-
 
 let Item = (props) => {
   const { children, to } = props;

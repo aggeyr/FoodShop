@@ -5,8 +5,15 @@ import MenusList from './MenusList.jsx';
 
 class Menu extends Component {
   componentWillMount() {
-    const { category, actions: { getMenus } } = this.props;
-    getMenus(category);
+    const { category, actions: { getGoods } } = this.props;
+    getGoods(category, true);
+  }
+  componentWillReceiveProps(props) {
+    const { category, actions: { getGoods } } = this.props;
+    const newCategory = props.category;
+    if (category !== newCategory) {
+      getGoods(newCategory, true);
+    }
   }
   render() {
     const { view, app: { selectedMeals } } = this.props.model;
