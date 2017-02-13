@@ -29,6 +29,7 @@ namespace FoodShop.Services
         public IList<Good> GetGoodsByCategoryName(string name)
         {
             return context.Goods
+                .Include("Configurations")
                 .Where(g => g.Categories.Any(c => c.Name == name))
                 .ToList();
         }

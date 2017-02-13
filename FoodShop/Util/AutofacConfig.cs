@@ -24,7 +24,7 @@ namespace FoodShop.Util
                AsSelf()
                .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(typeof(IBaseService).Assembly)
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .Where(s => s.Name.EndsWith("Service"))
                 .AsImplementedInterfaces()
                 .PropertiesAutowired();
@@ -32,7 +32,6 @@ namespace FoodShop.Util
 
 
             var container = builder.Build();
-            //DependencyResolver.SetResolver(new AutofacWebApiDependencyResolver(container));
             var config = GlobalConfiguration.Configuration;
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 

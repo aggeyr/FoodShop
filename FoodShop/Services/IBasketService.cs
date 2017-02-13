@@ -6,7 +6,8 @@ using System.Web;
 
 namespace FoodShop.Services
 {
-    public interface IBaseService
+    public interface IBasketService
     {
+        decimal CountTotal(IEnumerable<OrderGoodModel> goods);
     }
 }

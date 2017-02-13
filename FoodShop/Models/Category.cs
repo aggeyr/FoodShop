@@ -16,6 +16,8 @@ namespace FoodShop.Models
         public Guid? ParentId { get; set; }
 
         [Required]
+        [StringLength(200)]
+        [Index(IsUnique = true)]
         public string Name { get; set; }
 
         public virtual IList<Good> Goods { get; set; }

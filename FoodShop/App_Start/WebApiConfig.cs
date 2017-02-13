@@ -8,7 +8,7 @@ namespace FoodShop.App_Start
         {
             configuration.EnableCors();
 
-            //configuration.MapHttpAttributeRoutes();
+            configuration.MapHttpAttributeRoutes();
 
             configuration.Routes.MapHttpRoute(
                 "API Default", 
