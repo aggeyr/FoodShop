@@ -1,5 +1,5 @@
 export function mergeSelected(selected, newItem) {
-  const index = selected.findIndex((item) => item.id === newItem.id);
+  const index = selected.findIndex((item) => item.configurationId === newItem.configurationId);
   if (~index) {
     selected[index] = newItem;
   } else {
@@ -10,7 +10,7 @@ export function mergeSelected(selected, newItem) {
 
 export function mergeMeals(selected, meals) {
   meals.map((meal) => {
-    let index = selected.findIndex((item) => item.id === meal.id);
+    let index = selected.findIndex((item) => item.configurationId === meal.configurationId);
     if (~index) {
       selected[index] = meal;
     } else {
@@ -41,7 +41,7 @@ export function renderNumberOptions(number) {
 
 export function findNumber(selected, id) {
   for (let i = 0; i < selected.length; i++) {
-    if (selected[i].id === id)
+    if (selected[i].configurationId === id)
       return selected[i].number;
   }
   return 0;
@@ -49,7 +49,7 @@ export function findNumber(selected, id) {
 export function findSelectedConfigurations(selected, configurations) {
   let result = [];
   configurations.map((item) => {
-    let overlap = selected.find((meal) => meal.id === item.Id);
+    let overlap = selected.find((meal) => meal.configurationId === item.Id);
     if (overlap) {
       result.push(overlap);
     }

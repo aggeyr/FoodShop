@@ -55,7 +55,6 @@ class MenusList extends Component {
   render() {
     const { menus } = this.props;
     const { dialogOptions, selected, snackShow } = this.state;
-    const sizeList = () => (<p style={{ color: '#000' }}>Список размеров</p>);
     const actions = [
       <FlatButton
         label="Cancel"
@@ -79,8 +78,8 @@ class MenusList extends Component {
               titleBackground="rgba(255, 255, 255, 0.6)"
               titleStyle={{ color: '#000' }}
               key={key}
-              title={menu.Description}
-              subtitle={sizeList()}
+              title={menu.Name}
+              subtitle={menu.Description}
               onClick={() => this.openDialog(menu)}
             >
               <img src={menu.ImageUrl} />

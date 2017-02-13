@@ -23,7 +23,7 @@ class Header extends Component {
             <div className="basket">
               <Link to="/basket">
                 <img src={icon} />
-                <p>Total: ${total}</p>
+                <p>Total: ${total.toFixed(2)}</p>
               </Link>
             </div>
           </ToolbarGroup>

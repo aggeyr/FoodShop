@@ -9,18 +9,14 @@ class service {
   }
 
   getGoodsByCategoryId = (data, success, failed) => {
-    return this.requestHelper.getWithAjax('Good/getGoodsByCategoryId', data, success, failed);
-    // return getMeals(data, success, failed);
+    //return this.requestHelper.getWithAjax('Good/getGoodsByCategoryId', data, success, failed);
+    return getMeals(data, success, failed);
   };
 
   getGoodsByCategoryName = (data, success, failed) => {
-    return this.requestHelper.getWithAjax('Good/getGoodsByCategoryName', data, success, failed);
-    // return getMeals(data, success, failed);
+    // return this.requestHelper.getWithAjax('Good/getGoodsByCategoryName', data, success, failed);
+    return getMeals(data, success, failed);
   };
-
-  getTotal(data, success, failed) {
-    return this.requestHelper.postWithAjax('Basket/CountTotal', data, success, failed);
-  }
 
 }
 

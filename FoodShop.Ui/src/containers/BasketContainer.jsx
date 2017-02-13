@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions/LandingPageActions';
+import * as actions from '../actions/BasketActions';
 
 import Basket from '../components/basket/Basket.jsx';
 
@@ -10,7 +10,7 @@ class BasketContainer extends Component {
     const {model, actions} = this.props;
 
     return (
-      <Basket model={model} actions={actions} />
+      <Basket {...model} actions={actions} />
     );
   }
 }

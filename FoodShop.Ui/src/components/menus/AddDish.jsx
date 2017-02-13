@@ -11,7 +11,7 @@ class AddDish extends Component {
   onDishSelect(number, meal) {
     const { onSelect, selected } = this.props;
     const newMeal = {
-      id: meal.Id,
+      configurationId: meal.Id,
       price : meal.Price,
       number
     };
