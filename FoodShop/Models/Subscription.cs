@@ -16,6 +16,6 @@ namespace FoodShop.Models
         [Required]
         public string Name { get; set; }
 
-        public virtual IList<ApplicationUser> Users { get; set; }
+        public virtual IList<User> Users { get; set; }
     }
 }

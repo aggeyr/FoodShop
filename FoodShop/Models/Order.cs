@@ -17,7 +17,7 @@ namespace FoodShop.Models
         public DateTime Date { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; }
+        public User User { get; set; }
 
         public Discount UsedDiscount { get; set; }
 

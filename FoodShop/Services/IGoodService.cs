@@ -1,14 +1,12 @@
 ﻿using FoodShop.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace FoodShop.Services
 {
     public interface IGoodService
     {
-        void AddGood(Good g);
+        void AddGood(Good good);
 
         IList<Good> GetGoodsByCategoryId(Guid id);
 

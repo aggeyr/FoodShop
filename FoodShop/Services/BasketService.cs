@@ -1,16 +1,13 @@
-﻿using FoodShop.Models;
-using System;
+﻿using FoodShop.DataProperties;
+using FoodShop.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 namespace FoodShop.Services
 {
-    public class BasketService: IBasketService
+    public class BasketService : IBasketService
     {
-        private readonly ApplicationDbContext context;
+        private readonly FoodShopContext context;
 
-        public BasketService(ApplicationDbContext context)
+        public BasketService(FoodShopContext context)
         {
             this.context = context;
         }
@@ -18,7 +15,7 @@ namespace FoodShop.Services
         public decimal CountTotal(IEnumerable<OrderGoodModel> goods)
         {
             decimal total = 0;
-            foreach(var orderModel in goods)
+            foreach (var orderModel in goods)
             {
                 var configuration = context.Configurations.Find(orderModel.ConfigurationId);
                 total += configuration.Price * orderModel.Number;

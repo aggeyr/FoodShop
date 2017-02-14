@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 namespace FoodShop.Controllers
 {
     [EnableCors("*", "*", "*")]
-    public class BasketController: ApiController
+    public class BasketController : ApiController
     {
         private readonly IBasketService service;
 

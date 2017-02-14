@@ -1,19 +1,22 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 
-namespace FoodShop.App_Start
+namespace FoodShop
 {
-    public class WebApiConfig
+    public static class WebApiConfig
     {
-        public static void Register(HttpConfiguration configuration)
+        public static void Register(HttpConfiguration config)
         {
-            configuration.EnableCors();
+            config.EnableCors();
+            config.MapHttpAttributeRoutes();
 
-            configuration.MapHttpAttributeRoutes();
-
-            configuration.Routes.MapHttpRoute(
-                "API Default", 
-                "api/{controller}/{action}/{id}",
-                new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
         }
     }
 }
