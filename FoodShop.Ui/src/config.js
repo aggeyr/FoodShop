@@ -1,5 +1,5 @@
 const config = {
-  apiPath: 'http://localhost:20359/api/'
+  apiPath: 'http://localhost:1098/api/'
 };
 
 export default config;

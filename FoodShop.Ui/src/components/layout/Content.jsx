@@ -7,8 +7,12 @@ import * as utils from '../../utils/utils';
 
 class Content extends Component {
   render() {
-    const { children, app : { selectedMeals } } = this.props;
+    const { route: { auth }, app : { selectedMeals } } = this.props;
     const total = utils.calculateTotal(selectedMeals);
+    let { children } = this.props;
+    if (children) {
+      children = React.cloneElement(children, {auth});
+    }
     return (
       <MuiThemeProvider>
         <div className="content">

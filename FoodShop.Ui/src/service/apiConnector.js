@@ -31,9 +31,15 @@ var RequestHelper = function() {
 };
 
 function makeRequest(params, success, failed) {
+  const token = localStorage.getItem('id_token');
+  let headers = {};
+  if (token) {
+    headers.Authorization = 'Bearer ' + token;
+  }
 
   return req.ajax({
     ...params,
+    headers,
     success: function(data, statusText, xhr) {
       success &&
       success(data, statusText, xhr);
