@@ -1,7 +1,4 @@
-/*eslint no-unused-vars: "off"*/
 import { RequestHelper } from './apiConnector';
-
-import image from '../sources/img/dishEx.jpg';
 
 class service {
   constructor() {
@@ -10,53 +7,20 @@ class service {
 
   getGoodsByCategoryId = (data, success, failed) => {
     return this.requestHelper.getWithAjax('Good/getGoodsByCategoryId', data, success, failed);
-    // return getMeals(data, success, failed);
   };
 
   getGoodsByCategoryName = (data, success, failed) => {
     return this.requestHelper.getWithAjax('Good/getGoodsByCategoryName', data, success, failed);
-    // return getMeals(data, success, failed);
   };
 
   getTotal(data, success, failed) {
     return this.requestHelper.postWithAjax('Basket/CountTotal', data, success, failed);
   }
 
+  updateUser(data, success, fail) {
+    return this.requestHelper.patchToExternal(`https://${data.domain}/api/v2/users/${data.userId}`, data.data, success, fail);
+  }
 }
 
-function getMeals(data, success) {
-  let meals = [];
-  for (let i = 0; i < 20; i++) {
-    let meal = {
-      Id: i,
-      Name: data.name+ ' блюдо №1',
-      Description: 'Вкусно, честно',
-      ImageUrl: image,
-      Calories: '563',
-      Configurations: [
-        {
-          Size: '12см',
-          Weight: '350г',
-          Price: '5',
-          Id: 'confid' + 1
-        },
-        {
-          Size: '18см',
-          Weight: '500г',
-          Price: '8',
-          Id: 'confid' + 2
-        },
-        {
-          Size: '20см',
-          Weight: '650г',
-          Price: '10',
-          Id: 'confid' + 3
-        },
-      ]
-    };
-    meals.push(meal);
-  }
-  success(meals);
-}
 
 export default new service();

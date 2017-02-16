@@ -46,6 +46,7 @@ export function findNumber(selected, id) {
   }
   return 0;
 }
+
 export function findSelectedConfigurations(selected, configurations) {
   let result = [];
   configurations.map((item) => {
@@ -55,4 +56,11 @@ export function findSelectedConfigurations(selected, configurations) {
     }
   });
   return result;
+}
+
+export function getProfileItem(itemName) {
+  const profile = JSON.parse(localStorage.getItem('profile'));
+  if (profile) {
+    return profile[itemName];
+  }
 }

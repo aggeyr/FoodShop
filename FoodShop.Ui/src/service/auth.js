@@ -1,8 +1,11 @@
+import { EventEmitter } from 'events';
 import Auth0Lock from 'auth0-lock';
-// import { browserHistory } from 'react-router';
+import api from './service';
+import { isTokenExpired } from '../utils/jwtHelper.js';
 
-export default class AuthService {
+export default class AuthService extends EventEmitter {
   constructor(clientId, domain) {
+    super();
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
         redirectUrl: 'http://localhost:3000/#/order',
@@ -15,16 +18,25 @@ export default class AuthService {
         logo: 'http://res.cloudinary.com/dum4mjc9q/image/upload/v1487084851/Pizza-icon_bqtwwf.png'
       },
       languageDictionary: {
-        title: 'Авторизируйтесь'
+        title: 'FoodShop'
       }
     });
     this.lock.on('authenticated', this._doAuthentication.bind(this));
-    this.lock.on('authorization_error', this._authorizationError.bind(this));
     this.login = this.login.bind(this);
+    this.getProfile = this.getProfile.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+    this.domain = domain;
   }
 
   _doAuthentication(authResult) {
     this.setToken(authResult.idToken);
+    this.lock.getProfile(authResult.idToken, (error, profile) => {
+      if (error) {
+        console.error(error);
+      } else {
+        this.setProfile(profile);
+      }
+    });
   }
 
   login() {
@@ -32,7 +44,17 @@ export default class AuthService {
   }
 
   loggedIn() {
-    return !!this.getToken();
+    const token = this.getToken();
+    return !!token && !isTokenExpired(token);
+  }
+
+  setProfile(profile){
+    localStorage.setItem('profile', JSON.stringify(profile));
+  }
+
+  getProfile() {
+    const profile = localStorage.getItem('profile');
+    return profile ? JSON.parse(localStorage.profile) : {};
   }
 
   setToken(idToken) {
@@ -47,9 +69,12 @@ export default class AuthService {
     localStorage.removeItem('id_token');
   }
 
-  _authorizationError(error){
-    debugger;
-    // Unexpected authentication error
-    console.log('Authentication Error', error);
+  updateProfile(userId, data, callback) {
+    const { domain } = this;
+    api.updateUser({ userId, domain, data })
+      .then(newProfile => {
+        this.setProfile(newProfile);
+        callback(newProfile);
+      });
   }
 }

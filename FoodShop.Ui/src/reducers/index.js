@@ -6,6 +6,7 @@ import BasketReducer from './BasketReducer';
 import LandingPageReducer from './LandingReducer';
 import MenuReducer from './MenuReducer';
 import OrderReducer from './OrderReducer';
+import UserProfileReducer from './UserProfileReducer';
 
 export default combineReducers({
   AppReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   LandingPageReducer,
   MenuReducer,
   OrderReducer,
+  UserProfileReducer,
   routing: routerReducer
 });

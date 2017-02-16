@@ -17,6 +17,19 @@ var RequestHelper = function() {
     );
   };
 
+  this.patchToExternal = (url, entity, success, failed) => {
+    return makeRequest({
+        url: url,
+        type: 'PATCH',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify(entity)
+      },
+      success,
+      failed
+    );
+  };
+
   this.getWithAjax = (url, entity, success, failed) => {
     return makeRequest({
         url: this.host + url,

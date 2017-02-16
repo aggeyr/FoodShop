@@ -1,13 +1,18 @@
 import decode from 'jwt-decode';
 
-export function getTokenExpirationDate(token){
+export function getItemFromToken(token, itemName) {
   const decoded = decode(token);
-  if(!decoded.exp) {
+  return decoded[itemName];
+}
+
+export function getTokenExpirationDate(token){
+  const exp = getItemFromToken(token, 'exp');
+  if(!exp) {
     return null;
   }
 
-  const date = new Date(0); // The 0 here is the key, which sets the date to the epoch
-  date.setUTCSeconds(decoded.exp);
+  const date = new Date(0);
+  date.setUTCSeconds(exp);
   return date;
 }
 
